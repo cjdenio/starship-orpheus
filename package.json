@@ -7,6 +7,8 @@
   "author": "Caleb Denio <cjdenio44@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "nodemon": "^2.0.6",
+    "ts-node": "^9.0.0",
     "typescript": "^4.1.2"
   },
   "dependencies": {
@@ -14,6 +16,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "dev": "nodemon -x ts-node src/index.ts"
   }
 }
