@@ -1,0 +1,9 @@
+{
+  "name": "the-castle",
+  "version": "1.0.0",
+  "description": "Competitive escape-room game for Slack",
+  "main": "dist/index.js",
+  "repository": "https://github.com/cjdenio/the-castle",
+  "author": "Caleb Denio <cjdenio44@gmail.com>",
+  "license": "MIT"
+}
