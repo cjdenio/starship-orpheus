@@ -1,11 +1,11 @@
 name: Format
 on: push
 jobs:
-  - format:
-      name: Format
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - uses: actions/setup-node@v2
-        - run: yarn install
-        - run: yarn format:check
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: yarn install
+      - run: yarn format:check
