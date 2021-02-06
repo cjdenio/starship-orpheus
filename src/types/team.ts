@@ -1,31 +1,10 @@
-import { Entity, Column, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, BaseEntity } from "typeorm";
 
 @Entity()
-export default class Team {
+export class Team extends BaseEntity {
   @PrimaryColumn()
   id: string;
 
   @Column()
   channel: string;
-}
-
-@Entity()
-export class Photo {
-  @PrimaryColumn()
-  id: number;
-
-  @Column()
-  name: string;
-
-  @Column()
-  description: string;
-
-  @Column()
-  filename: string;
-
-  @Column()
-  views: number;
-
-  @Column()
-  isPublished: boolean;
 }

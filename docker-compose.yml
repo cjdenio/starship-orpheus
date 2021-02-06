@@ -1,0 +1,31 @@
+version: "3"
+services:
+  main:
+    build:
+      dockerfile: dev.Dockerfile
+      context: .
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/the-castle
+    env_file: .env
+    volumes:
+      - ".:/usr/src/app"
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+  db:
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: the-castle
+    volumes:
+      - "db_volume:/var/lib/postgresql/data"
+  ngrok:
+    image: wernight/ngrok
+    environment:
+      NGROK_PORT: main:3000
+    ports:
+      - "3001:4040"
+volumes:
+  db_volume:

@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import { App } from "@slack/bolt";
+import { createConnection } from "typeorm";
 
 const app = new App({
   token: process.env.SLACK_TOKEN,
@@ -7,6 +8,11 @@ const app = new App({
 });
 
 (async () => {
+  await createConnection({
+    type: "postgres",
+    url: process.env.DATABASE_URL,
+  });
+
   await app.start(process.env.PORT || 3000);
   console.log("App started!");
 })();
