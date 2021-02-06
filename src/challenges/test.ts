@@ -3,7 +3,7 @@ import Challenge from "./lib/challenge";
 class TestChallenge extends Challenge {
   announce() {
     this.app.client.chat.postMessage({
-      channel: "",
+      channel: this.team.channel,
       blocks: [
         {
           type: "section",

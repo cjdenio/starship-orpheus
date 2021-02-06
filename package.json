@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@slack/bolt": "^2.4.1",
+    "pg": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.30"
   },
   "scripts": {

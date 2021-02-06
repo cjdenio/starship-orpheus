@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { App } from "@slack/bolt";
 
 const app = new App({
