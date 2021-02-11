@@ -1,22 +1,45 @@
 import { App } from "@slack/bolt";
+import { EventEmitter } from "events";
 
-import Team from "../../types/team";
+import { Team } from "../../types/team";
+import SlackEventListener from "../../listener";
 
-abstract class Challenge {
+abstract class Challenge extends EventEmitter {
   app: App;
-  index: number;
   team: Team;
+  slackToken: string;
+  listener: SlackEventListener;
 
-  constructor(app: App, index: number, team: Team) {
+  isRunning: boolean = true;
+
+  constructor(
+    app: App,
+    team: Team,
+    slackToken: string,
+    listener: SlackEventListener
+  ) {
+    super();
+
     this.app = app;
-    this.index = index;
     this.team = team;
+    this.listener = listener;
+
+    this.slackToken = slackToken;
+
+    this.init();
+    this.addListeners();
   }
+
+  abstract init(): void;
 
   abstract addListeners(): void;
   abstract removeListeners(): void;
 
-  markCompleted() {}
+  markCompleted() {
+    this.emit("completed");
+    this.removeListeners();
+    this.isRunning = false;
+  }
 }
 
 export default Challenge;

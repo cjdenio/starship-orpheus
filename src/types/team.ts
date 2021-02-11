@@ -1,6 +1,17 @@
-export default interface Team {
-  name: string;
-  id: "a" | "b";
+import { Entity, Column, PrimaryColumn, BaseEntity } from "typeorm";
+
+@Entity()
+export class Team extends BaseEntity {
+  @PrimaryColumn({
+    type: "int",
+  })
+  id: number;
+
+  @Column()
   channel: string;
+
+  @Column({
+    nullable: true,
+  })
   currentChallenge: number;
 }
