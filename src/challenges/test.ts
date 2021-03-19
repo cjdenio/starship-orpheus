@@ -34,7 +34,7 @@ export default {
 
     console.log(`init challenge for team ${ctx.team.id}`);
 
-    ctx.listener.command("/solve", ctx.data.commandListener);
+    ctx.listener.command("/solve", ctx.team.channel, ctx.data.commandListener);
   },
 
   async remove(ctx) {
