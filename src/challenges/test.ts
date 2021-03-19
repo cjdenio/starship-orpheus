@@ -3,57 +3,41 @@ import {
   SlackCommandMiddlewareArgs,
   SlackEventMiddlewareArgs,
 } from "@slack/bolt";
-import Challenge from "./lib/challenge";
 
-class TestChallenge extends Challenge {
-  boundCommandListener: (
-    args: AllMiddlewareArgs & SlackEventMiddlewareArgs<"message">
-  ) => Promise<void>;
+import { Challenge, ChallengeContext } from "./lib/challenge";
 
-  init() {
-    this.boundCommandListener = this.commandListener.bind(this);
-  }
-
-  async announce() {
-    await this.app.client.chat.postMessage({
-      channel: this.team.channel,
-      blocks: [
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text:
-              "challenge starting! say `password` in this channel to solve :)",
-          },
-        },
-      ],
-      text: "hi",
-      token: this.slackToken,
-    });
-  }
-
-  addListeners() {
-    this.listener.event("message", this.boundCommandListener);
-  }
-
-  removeListeners() {
-    this.listener.removeListener("event:message", this.boundCommandListener);
-  }
-
-  async commandListener({
-    message,
-  }: SlackEventMiddlewareArgs<"message"> & AllMiddlewareArgs) {
-    if (message.channel == this.team.channel && message.text == "password") {
-      this.markCompleted();
-    } else {
-      this.app.client.chat.postMessage({
-        token: this.slackToken,
-        text: `hmm... \`${message.text}\` wasn't the password...`,
-        channel: message.channel,
-        thread_ts: message.ts,
-      });
-    }
-  }
+function onCommand(ctx: ChallengeContext) {
+  return async ({
+    command,
+    ack,
+  }: AllMiddlewareArgs & SlackCommandMiddlewareArgs) => {
+    console.log("challenge 1 got command");
+    await ack({ text: "solved" });
+    await ctx.solve();
+  };
 }
 
-export default TestChallenge;
+export default {
+  async start(ctx) {
+    await ctx.slack.client.chat.postMessage({
+      channel: ctx.team.channel,
+      text:
+        "Thus, your journey has reached its beginning. You spot a dusty book in the corner, which says _type `/solve` to continue_",
+      token: ctx.token,
+    });
+  },
+
+  async init(ctx) {
+    ctx.data = {
+      commandListener: onCommand(ctx),
+    };
+
+    console.log(`init challenge for team ${ctx.team.id}`);
+
+    ctx.listener.command("/solve", ctx.data.commandListener);
+  },
+
+  async remove(ctx) {
+    ctx.listener.removeListener("command:/solve", ctx.data.commandListener);
+  },
+} as Challenge;

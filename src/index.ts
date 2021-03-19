@@ -1,22 +1,22 @@
 import "reflect-metadata";
-import { App } from "@slack/bolt";
 import { createConnection } from "typeorm";
 
 import { Team } from "./types/team";
 
-import SlackEventListener from "./listener";
+import { app, listener } from "./state";
+import { setChallenge } from "./util";
 
-import Challenge from "./challenges/lib/challenge";
-import challenges from "./challenges";
+app.command("/start", async ({ ack, command: { channel_id: channel } }) => {
+  const team = await Team.findOne({ channel });
 
-const app = new App({
-  token: process.env.SLACK_TOKEN,
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
+  if (!team) {
+    ack("Please run this in your team's channel.");
+    return;
+  }
+
+  await ack("starting");
+  await setChallenge(team, 0, true);
 });
-
-let currentChallenges: {
-  [team: number]: { challenge: Challenge; index: number } | null;
-} = {};
 
 (async () => {
   await createConnection({
@@ -26,21 +26,12 @@ let currentChallenges: {
     synchronize: true,
   });
 
-  const listener = new SlackEventListener(app);
-
+  // Init challenges
   const teams = await Team.find();
-  teams.forEach((team) => {
-    currentChallenges[team.id] = team.currentChallenge
-      ? {
-          challenge: new challenges[team.currentChallenge](
-            app,
-            team,
-            process.env.SLACK_TOKEN as string,
-            listener
-          ),
-          index: team.currentChallenge,
-        }
-      : null;
+  teams.forEach(async (team) => {
+    if (team.currentChallenge != null) {
+      await setChallenge(team, team.currentChallenge, false);
+    }
   });
 
   await app.start(process.env.PORT || 3000);

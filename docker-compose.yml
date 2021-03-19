@@ -27,6 +27,8 @@ services:
       - "3002:8081"
     environment:
       DATABASE_URL: postgres://postgres:postgres@db:5432/the-castle?sslmode=disable
+    depends_on:
+      - db
   ngrok:
     image: wernight/ngrok
     environment:
