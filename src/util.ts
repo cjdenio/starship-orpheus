@@ -29,7 +29,12 @@ export const setChallenge = async (
 
   // Does such a challenge exist?
   if (!challenges[index]) {
-    console.log(`Team ${team.id} won!!!`);
+    if (shouldCallStart) {
+      console.log(`Team ${team.id} won!!!`);
+    }
+
+    team.currentChallenge = -1;
+    await team.save();
     return;
   }
 

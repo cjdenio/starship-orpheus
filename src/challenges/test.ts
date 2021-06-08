@@ -38,6 +38,10 @@ export default {
   },
 
   async remove(ctx) {
-    ctx.listener.removeListener("command:/solve", ctx.data.commandListener);
+    ctx.listener.removeCommand(
+      "/solve",
+      ctx.team.channel,
+      ctx.data.commandListener
+    );
   },
 } as Challenge;
