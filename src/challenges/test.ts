@@ -1,16 +1,9 @@
-import {
-  AllMiddlewareArgs,
-  SlackCommandMiddlewareArgs,
-  SlackEventMiddlewareArgs,
-} from "@slack/bolt";
+import { AllMiddlewareArgs, SlackCommandMiddlewareArgs } from "@slack/bolt";
 
 import { Challenge, ChallengeContext } from "./lib/challenge";
 
 function onCommand(ctx: ChallengeContext) {
-  return async ({
-    command,
-    ack,
-  }: AllMiddlewareArgs & SlackCommandMiddlewareArgs) => {
+  return async ({ ack }: AllMiddlewareArgs & SlackCommandMiddlewareArgs) => {
     console.log("challenge 1 got command");
     await ack({ text: "solved" });
     await ctx.solve();
@@ -18,6 +11,8 @@ function onCommand(ctx: ChallengeContext) {
 }
 
 export default {
+  name: "Restoring Oxygen",
+
   async start(ctx) {
     await ctx.slack.client.chat.postMessage({
       channel: ctx.team.channel,

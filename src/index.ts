@@ -3,7 +3,7 @@ import { createConnection } from "typeorm";
 
 import { Team } from "./types/team";
 
-import { app, listener } from "./state";
+import { app } from "./state";
 import { setChallenge } from "./util";
 
 app.command("/start", async ({ ack, command: { channel_id: channel } }) => {

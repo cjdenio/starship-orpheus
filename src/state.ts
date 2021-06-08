@@ -4,7 +4,7 @@ import { App } from "@slack/bolt";
 import { Challenge, ChallengeContext } from "./challenges/lib/challenge";
 import SlackEventListener from "./listener";
 
-export let currentChallenges: {
+export const currentChallenges: {
   [team: number]: {
     challenge: Challenge;
     context: ChallengeContext;

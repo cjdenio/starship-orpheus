@@ -22,7 +22,7 @@ class SlackEventListener extends EventEmitter {
     command: string,
     channel: string,
     listener: Middleware<SlackCommandMiddlewareArgs>
-  ) {
+  ): void {
     if (!this.commandListeners.includes(command)) {
       this.app.command(command, this.commandListener(command));
       this.commandListeners.push(command);
@@ -35,14 +35,14 @@ class SlackEventListener extends EventEmitter {
     command: string,
     channel: string,
     listener: Middleware<SlackCommandMiddlewareArgs>
-  ) {
+  ): void {
     this.removeListener(`command:${command}:${channel}`, listener);
   }
 
   event<T extends string>(
     event: T,
     listener: Middleware<SlackEventMiddlewareArgs<T>>
-  ) {
+  ): void {
     if (!this.eventListeners.includes(event)) {
       this.app.event(event, this.eventListener(event));
       this.eventListeners.push(event);

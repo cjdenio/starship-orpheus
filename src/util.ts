@@ -1,8 +1,6 @@
 import { Team } from "./types/team";
 import { currentChallenges } from "./state";
 import challenges from "./challenges";
-import SlackEventListener from "./listener";
-import { App } from "@slack/bolt";
 import { ChallengeContext } from "./challenges/lib/challenge";
 
 import { app, listener } from "./state";
@@ -17,7 +15,7 @@ export const setChallenge = async (
   team: Team,
   index: number,
   shouldCallStart: boolean
-) => {
+): Promise<void> => {
   // First, de-init the existing challenge (if necessary)
   if (currentChallenges[team.id]) {
     await currentChallenges[team.id]?.challenge.remove(
