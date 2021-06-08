@@ -17,3 +17,11 @@ jobs:
       - uses: actions/setup-node@v2
       - run: yarn install
       - run: yarn lint:check
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: yarn install
+      - run: yarn build

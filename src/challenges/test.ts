@@ -16,8 +16,7 @@ export default {
   async start(ctx) {
     await ctx.slack.client.chat.postMessage({
       channel: ctx.team.channel,
-      text:
-        "Thus, your journey has reached its beginning. You spot a dusty book in the corner, which says _type `/solve` to continue_",
+      text: "Thus, your journey has reached its beginning. You spot a dusty book in the corner, which says _type `/solve` to continue_",
       token: ctx.token,
     });
   },
