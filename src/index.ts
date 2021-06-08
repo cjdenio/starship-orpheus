@@ -29,7 +29,7 @@ app.command("/start", async ({ ack, command: { channel_id: channel } }) => {
   // Init challenges
   const teams = await Team.find();
   teams.forEach(async (team) => {
-    if (team.currentChallenge != null) {
+    if (team.currentChallenge !== null) {
       await setChallenge(team, team.currentChallenge, false);
     }
   });
