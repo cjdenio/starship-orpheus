@@ -25,7 +25,7 @@ export const setChallenge = async (
     currentChallenges[team.id] = null;
   }
 
-  // Does such a challenge exist?
+  // Is such a challenge nonexistent?
   if (!challenges[index]) {
     if (shouldCallStart) {
       console.log(`Team ${team.id} won!!!`);
@@ -47,7 +47,31 @@ export const setChallenge = async (
       team,
       listener,
       token: process.env.SLACK_TOKEN as string,
+      userToken: process.env.SLACK_USER_TOKEN as string,
       solve: onSolve(team.id, index),
+      post: async (text: string, divider = true) => {
+        app.client.chat.postMessage({
+          text,
+          blocks: [
+            {
+              type: "section",
+              text: {
+                type: "mrkdwn",
+                text,
+              },
+            },
+            ...(divider
+              ? [
+                  {
+                    type: "divider",
+                  },
+                ]
+              : []),
+          ],
+          channel: team.channel,
+          token: process.env.SLACK_TOKEN as string,
+        });
+      },
       data: null,
     },
   };

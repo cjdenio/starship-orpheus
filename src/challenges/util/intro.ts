@@ -3,21 +3,19 @@ import { Challenge, ChallengeContext } from "../lib/challenge";
 
 function onCommand(ctx: ChallengeContext) {
   return async ({ ack }: AllMiddlewareArgs & SlackCommandMiddlewareArgs) => {
-    await ack();
+    await ack({
+      response_type: "in_channel",
+    });
     await ctx.solve();
   };
 }
 
-export default function (text: string): Challenge {
+export default function (part: number, text: string): Challenge {
   return {
-    name: "Introduction",
+    name: `Introduction Part ${part}`,
 
     async start(ctx) {
-      await ctx.slack.client.chat.postMessage({
-        channel: ctx.team.channel,
-        text,
-        token: ctx.token,
-      });
+      await ctx.post(text + "\n\n_Type /next to continue._");
     },
 
     async init(ctx) {

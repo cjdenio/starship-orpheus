@@ -8,11 +8,15 @@ export interface ChallengeContext {
   team: Team;
   listener: SlackEventListener;
   token: string;
+  userToken: string;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
 
   solve: () => Promise<void>;
+
+  // Posts a message to the current team's channel
+  post: (text: string, divider?: boolean) => Promise<void>;
 }
 
 export interface Challenge {

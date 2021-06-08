@@ -6,6 +6,8 @@ import {
 } from "@slack/bolt";
 import { EventEmitter } from "events";
 
+import config from "./config";
+
 class SlackEventListener extends EventEmitter {
   app: App;
 
@@ -16,6 +18,14 @@ class SlackEventListener extends EventEmitter {
     super();
 
     this.app = app;
+
+    config.commands.forEach((c) => {
+      app.command(c, this.commandListener(c));
+    });
+
+    config.events.forEach((e) => {
+      app.event(e, this.eventListener(e));
+    });
   }
 
   command(
@@ -23,11 +33,6 @@ class SlackEventListener extends EventEmitter {
     channel: string,
     listener: Middleware<SlackCommandMiddlewareArgs>
   ): void {
-    if (!this.commandListeners.includes(command)) {
-      this.app.command(command, this.commandListener(command));
-      this.commandListeners.push(command);
-    }
-
     this.addListener(`command:${command}:${channel}`, listener);
   }
 
@@ -43,11 +48,6 @@ class SlackEventListener extends EventEmitter {
     event: T,
     listener: Middleware<SlackEventMiddlewareArgs<T>>
   ): void {
-    if (!this.eventListeners.includes(event)) {
-      this.app.event(event, this.eventListener(event));
-      this.eventListeners.push(event);
-    }
-
     this.addListener(`event:${event}`, listener);
   }
 

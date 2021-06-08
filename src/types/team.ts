@@ -14,4 +14,9 @@ export class Team extends BaseEntity {
     nullable: true,
   })
   currentChallenge: number;
+
+  @Column({
+    nullable: true,
+  })
+  name: string;
 }
