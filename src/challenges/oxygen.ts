@@ -8,6 +8,7 @@ function onRequest(ctx: ChallengeContext) {
       res.json({
         ok: true,
         oxygen_status: "OK",
+        admin_code: "46553",
         oxygen_reserve: "backup",
       });
 
@@ -24,7 +25,7 @@ function onRequest(ctx: ChallengeContext) {
 }
 
 export default {
-  name: "Team Name",
+  name: "Restoring Oxygen, Part 1",
 
   async init(ctx: ChallengeContext) {
     ctx.data = {
@@ -38,7 +39,7 @@ export default {
   },
   async start(ctx: ChallengeContext) {
     await ctx.slack.client.chat.postMessage({
-      text: `THE URL IS >>>>>>> https://starship.clb.li/oxygen/6${ctx.team.id}763 <<<<<<<`,
+      text: `The secret URL is https://starship.clb.li/oxygen/6${ctx.team.id}763. You are recommended to pay attention to the response.`,
       blocks: [
         {
           type: "section",
@@ -48,8 +49,11 @@ export default {
 
 Thankfully, the ship's engineers built in a backup oxygen reserve, but it's rather difficult to access.
 
-To switch your ship's oxygen, you'll need to make a POST request to a URL that's hidden in this message. Good luck :salute:`,
+To switch your ship's oxygen over to the backup, you'll need to make a POST request to a URL that's hidden in this message. You'll need to muster all your technical ability to figure this one out.`,
           },
+        },
+        {
+          type: "divider",
         },
       ],
       channel: ctx.team.channel,

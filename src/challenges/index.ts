@@ -1,5 +1,6 @@
 import name from "./name";
 import oxygen from "./oxygen";
+import oxygen2 from "./oxygen-2";
 import intro from "./util/intro";
 
 export default [
@@ -20,7 +21,9 @@ You and your fellow crew members quickly discover that the _Orpheus_' communicat
   name,
   intro(
     3,
-    `With your team name decided, you're ready to begin. Good luck, crew of the _Orpheus_.`
+    (ctx) =>
+      `With your team name decided, you're ready to begin. Good luck, team *${ctx.team.name}*.`
   ),
   oxygen,
+  oxygen2,
 ];

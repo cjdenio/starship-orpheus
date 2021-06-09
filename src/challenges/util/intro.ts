@@ -10,12 +10,19 @@ function onCommand(ctx: ChallengeContext) {
   };
 }
 
-export default function (part: number, text: string): Challenge {
+export default function (
+  part: number,
+  text: string | ((ctx: ChallengeContext) => string)
+): Challenge {
   return {
     name: `Introduction Part ${part}`,
 
     async start(ctx) {
-      await ctx.post(text + "\n\n_Type /next to continue._");
+      if (typeof text === "string") {
+        await ctx.post(text + "\n\n_Type /next to continue._");
+      } else {
+        await ctx.post(text(ctx) + "\n\n_Type /next to continue._");
+      }
     },
 
     async init(ctx) {
