@@ -51,7 +51,7 @@ function onReaction(ctx: ChallengeContext) {
             token: ctx.userToken,
           });
 
-          await ctx.post(`I've set your team name to *${text}*!`, false);
+          await ctx.post(`I've set your team name to *${text}*!`);
 
           await ctx.solve();
         }

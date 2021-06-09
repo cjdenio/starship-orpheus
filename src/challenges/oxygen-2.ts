@@ -7,10 +7,7 @@ function onMessage(ctx: ChallengeContext) {
     event,
   }: SlackEventMiddlewareArgs<"message"> & AllMiddlewareArgs) => {
     if (event.channel === ctx.team.channel && event.text === "46553") {
-      await ctx.post(
-        "`Access granted. Oxygen reserve successfully switched to backup.`",
-        false
-      );
+      await ctx.post("`Access granted. Oxygen reserve migration complete.`");
       await ctx.solve();
     } else if (event.channel === ctx.team.channel && event.text === "back") {
       await setChallenge(ctx.team, ctx.team.currentChallenge - 1, true);
@@ -32,7 +29,7 @@ export default {
     await ctx.post(
       `You suddenly remember that oxygen can only be fully switched over with an admin code. Please type the admin code below :arrow_down:
  
-_hint: don't know it? type \`back\` to try the previous challenge again_`
+_hint: don't know it? type \`back\` to try the previous challenge again._`
     );
   },
   async remove(ctx: ChallengeContext) {

@@ -12,10 +12,7 @@ function onRequest(ctx: ChallengeContext) {
         oxygen_reserve: "backup",
       });
 
-      await ctx.post(
-        "`Oxygen successfully switched to backup reserve.`",
-        false
-      );
+      await ctx.post("`Oxygen reserve migration system armed.`");
       await ctx.solve();
       return;
     }
@@ -49,7 +46,7 @@ export default {
 
 Thankfully, the ship's engineers built in a backup oxygen reserve, but it's rather difficult to access.
 
-To switch your ship's oxygen over to the backup, you'll need to make a POST request to a URL that's hidden in this message. You'll need to muster all your technical ability to figure this one out.`,
+To switch your ship's oxygen over to the backup, you'll need to make a POST request to a URL that's hidden in this message.`,
           },
         },
         {
