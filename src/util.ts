@@ -3,7 +3,7 @@ import { currentChallenges } from "./state";
 import challenges from "./challenges";
 import { ChallengeContext } from "./challenges/lib/challenge";
 
-import { app, listener } from "./state";
+import { app, listener, httpListener } from "./state";
 
 const onSolve = (team: number, index: number) => {
   return async () => {
@@ -46,6 +46,7 @@ export const setChallenge = async (
       slack: app,
       team,
       listener,
+      httpListener,
       token: process.env.SLACK_TOKEN as string,
       userToken: process.env.SLACK_USER_TOKEN as string,
       solve: onSolve(team.id, index),

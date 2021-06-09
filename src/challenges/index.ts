@@ -1,4 +1,5 @@
 import name from "./name";
+import oxygen from "./oxygen";
 import intro from "./util/intro";
 
 export default [
@@ -17,5 +18,9 @@ You and your fellow crew members quickly discover that the _Orpheus_' communicat
     `It's up to you and your fellow astronauts to restore contact with Mission Control and make it safely to base. You'll need to work together, pooling together your collective skills. The future of the Mars program rests on your shoulders.`
   ),
   name,
-  intro(3, `wooooooooooooooooooooooo we can start now`),
+  intro(
+    3,
+    `With your team name decided, you're ready to begin. Good luck, crew of the _Orpheus_.`
+  ),
+  oxygen,
 ];

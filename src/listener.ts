@@ -1,5 +1,6 @@
 import {
   App,
+  ExpressReceiver,
   Middleware,
   SlackCommandMiddlewareArgs,
   SlackEventMiddlewareArgs,
@@ -8,7 +9,25 @@ import { EventEmitter } from "events";
 
 import config from "./config";
 
-class SlackEventListener extends EventEmitter {
+export class HttpListener extends EventEmitter {
+  receiver: ExpressReceiver;
+
+  constructor(receiver: ExpressReceiver) {
+    super();
+
+    this.receiver = receiver;
+
+    receiver.app.use((req, res, next) => {
+      if (this.listenerCount(req.path) > 0) {
+        this.emit(req.path, req, res);
+      } else {
+        next();
+      }
+    });
+  }
+}
+
+export class SlackEventListener extends EventEmitter {
   app: App;
 
   commandListeners: string[] = [];
@@ -74,5 +93,3 @@ class SlackEventListener extends EventEmitter {
     };
   }
 }
-
-export default SlackEventListener;

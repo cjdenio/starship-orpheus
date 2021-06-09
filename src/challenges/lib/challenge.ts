@@ -1,12 +1,13 @@
 import { App } from "@slack/bolt";
 
 import { Team } from "../../types/team";
-import SlackEventListener from "../../listener";
+import { HttpListener, SlackEventListener } from "../../listener";
 
 export interface ChallengeContext {
   slack: App;
   team: Team;
   listener: SlackEventListener;
+  httpListener: HttpListener;
   token: string;
   userToken: string;
 
