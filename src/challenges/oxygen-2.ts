@@ -7,7 +7,17 @@ function onMessage(ctx: ChallengeContext) {
     event,
   }: SlackEventMiddlewareArgs<"message"> & AllMiddlewareArgs) => {
     if (event.channel === ctx.team.channel && event.text === "46553") {
-      await ctx.post("`Access granted. Oxygen reserve migration complete.`");
+      await Promise.all([
+        ctx.post(
+          ":white_check_mark: `Access granted. Oxygen reserve migration complete.`"
+        ),
+        ctx.slack.client.reactions.add({
+          timestamp: event.ts,
+          token: ctx.token,
+          name: "white_check_mark",
+          channel: event.channel,
+        }),
+      ]);
       await ctx.solve();
     } else if (event.channel === ctx.team.channel && event.text === "back") {
       await setChallenge(ctx.team, ctx.team.currentChallenge - 1, true);

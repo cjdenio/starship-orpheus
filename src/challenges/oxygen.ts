@@ -12,7 +12,9 @@ function onRequest(ctx: ChallengeContext) {
         oxygen_reserve: "backup",
       });
 
-      await ctx.post("`Oxygen reserve migration system armed.`");
+      await ctx.post(
+        ":white_check_mark: `Oxygen reserve migration system armed.`"
+      );
       await ctx.solve();
       return;
     }
