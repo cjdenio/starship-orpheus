@@ -8,6 +8,7 @@ export const currentChallenges: {
   [team: number]: {
     challenge: Challenge;
     context: ChallengeContext;
+    deinit: (() => unknown) | undefined;
     index: number;
   } | null;
 } = {};

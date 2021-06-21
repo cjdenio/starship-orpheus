@@ -29,11 +29,13 @@ export default {
   name: "Restoring Oxygen, Part 1",
 
   async init(ctx: ChallengeContext) {
-    ctx.data = {
-      messageListener: onMessage(ctx),
-    };
+    const messageListener = onMessage(ctx);
 
-    ctx.listener.event("message", ctx.data.messageListener);
+    ctx.listener.event("message", messageListener);
+
+    return () => {
+      ctx.listener.removeListener("event:message", messageListener);
+    };
   },
   async start(ctx: ChallengeContext) {
     await ctx.post(
@@ -41,8 +43,5 @@ export default {
  
 _hint: don't know it? type \`back\` to try the previous challenge again._`
     );
-  },
-  async remove(ctx: ChallengeContext) {
-    ctx.listener.removeListener("event:message", ctx.data.messageListener);
   },
 } as Challenge;

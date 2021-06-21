@@ -27,14 +27,16 @@ export default {
   name: "Restoring Oxygen, Part 1",
 
   async init(ctx: ChallengeContext) {
-    ctx.data = {
-      requestListener: onRequest(ctx),
-    };
+    const requestListener = onRequest(ctx);
 
-    ctx.httpListener.addListener(
-      `/oxygen/6${ctx.team.id}763`,
-      ctx.data.requestListener
-    );
+    ctx.httpListener.addListener(`/oxygen/6${ctx.team.id}763`, requestListener);
+
+    return () => {
+      ctx.httpListener.removeListener(
+        `/oxygen/6${ctx.team.id}763`,
+        requestListener
+      );
+    };
   },
   async start(ctx: ChallengeContext) {
     await ctx.slack.client.chat.postMessage({
@@ -58,11 +60,5 @@ To switch your ship's oxygen over to the backup, you'll need to make a POST requ
       channel: ctx.team.channel,
       token: ctx.token,
     });
-  },
-  async remove(ctx: ChallengeContext) {
-    ctx.httpListener.removeListener(
-      `/oxygen/6${ctx.team.id}763`,
-      ctx.data.requestListener
-    );
   },
 } as Challenge;

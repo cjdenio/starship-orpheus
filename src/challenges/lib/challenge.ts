@@ -32,11 +32,8 @@ export interface Challenge {
   };
 
   // Used to register event listeners and such
-  init(ctx: ChallengeContext): Promise<void>;
+  init(ctx: ChallengeContext): Promise<() => unknown>;
 
   // Called when a team starts this challenge
   start(ctx: ChallengeContext): Promise<void>;
-
-  // Used to remove event listeners
-  remove(ctx: ChallengeContext): Promise<void>;
 }

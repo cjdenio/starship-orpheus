@@ -26,19 +26,13 @@ export default function (
     },
 
     async init(ctx) {
-      ctx.data = {
-        commandListener: onCommand(ctx),
+      const commandListener = onCommand(ctx);
+
+      ctx.listener.command("/next", ctx.team.channel, commandListener);
+
+      return () => {
+        ctx.listener.removeCommand("/next", ctx.team.channel, commandListener);
       };
-
-      ctx.listener.command("/next", ctx.team.channel, ctx.data.commandListener);
-    },
-
-    async remove(ctx) {
-      ctx.listener.removeCommand(
-        "/next",
-        ctx.team.channel,
-        ctx.data.commandListener
-      );
     },
   };
 }

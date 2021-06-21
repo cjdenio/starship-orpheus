@@ -18,9 +18,11 @@ export const setChallenge = async (
 ): Promise<void> => {
   // First, de-init the existing challenge (if necessary)
   if (currentChallenges[team.id]) {
-    await currentChallenges[team.id]?.challenge.remove(
-      currentChallenges[team.id]?.context as ChallengeContext
-    );
+    if (currentChallenges[team.id]?.deinit) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      currentChallenges[team.id].deinit();
+    }
 
     currentChallenges[team.id] = null;
   }
@@ -42,6 +44,7 @@ export const setChallenge = async (
   currentChallenges[team.id] = {
     challenge: challenges[team.currentChallenge],
     index: index,
+    deinit: undefined,
     context: {
       slack: app,
       team,
@@ -77,9 +80,11 @@ export const setChallenge = async (
     },
   };
 
-  currentChallenges[team.id]?.challenge.init(
-    currentChallenges[team.id]?.context as ChallengeContext
-  );
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  currentChallenges[team.id].deinit = await currentChallenges[
+    team.id
+  ]?.challenge.init(currentChallenges[team.id]?.context as ChallengeContext);
 
   if (shouldCallStart) {
     currentChallenges[team.id]?.challenge.start(

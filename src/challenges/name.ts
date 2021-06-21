@@ -64,23 +64,21 @@ export default {
   name: "Team Name",
 
   async init(ctx: ChallengeContext) {
-    ctx.data = {
-      reactionListener: onReaction(ctx),
-    };
+    const reactionListener = onReaction(ctx);
 
-    ctx.listener.event("reaction_added", ctx.data.reactionListener);
+    ctx.listener.event("reaction_added", reactionListener);
+
+    return () => {
+      console.log("deinit");
+
+      ctx.listener.removeListener("event:reaction_added", reactionListener);
+    };
   },
   async start(ctx: ChallengeContext) {
     await ctx.post(
       `One quick thing before you start: you'll need to work together to come up with a team name. Put your ideas down in the chat :arrow_down:, then react with :${EMOJI}: to the ones you like the most.
 
 I'll continue once a message has ${NUM_REACTIONS} :${EMOJI}: reactions.`
-    );
-  },
-  async remove(ctx: ChallengeContext) {
-    ctx.listener.removeListener(
-      "event:reaction_added",
-      ctx.data.reactionListener
     );
   },
 } as Challenge;
