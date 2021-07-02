@@ -1,11 +1,15 @@
 import {
+  Action,
   App,
   ExpressReceiver,
   Middleware,
+  SlackAction,
+  SlackActionMiddlewareArgs,
   SlackCommandMiddlewareArgs,
   SlackEventMiddlewareArgs,
 } from "@slack/bolt";
 import { EventEmitter } from "events";
+import e from "express";
 
 import config from "./config";
 
@@ -45,6 +49,10 @@ export class SlackEventListener extends EventEmitter {
     config.events.forEach((e) => {
       app.event(e, this.eventListener(e));
     });
+
+    config.actions.forEach((e) => {
+      app.action(e, this.actionListener(e));
+    });
   }
 
   command(
@@ -61,6 +69,13 @@ export class SlackEventListener extends EventEmitter {
     listener: Middleware<SlackCommandMiddlewareArgs>
   ): void {
     this.removeListener(`command:${command}:${channel}`, listener);
+  }
+
+  action<T extends SlackAction>(
+    action_id: string,
+    listener: Middleware<SlackActionMiddlewareArgs<T>>
+  ): void {
+    this.addListener(`action:${action_id}`, listener);
   }
 
   event<T extends string>(
@@ -90,6 +105,19 @@ export class SlackEventListener extends EventEmitter {
   ): Middleware<SlackEventMiddlewareArgs<T>> {
     return async (args) => {
       this.emit(`event:${event}`, args);
+    };
+  }
+
+  private actionListener(
+    action_id: string
+  ): Middleware<SlackActionMiddlewareArgs> {
+    return async (args) => {
+      if (this.listenerCount(`action:${action_id}`) > 0) {
+        this.emit(`action:${action_id}`, args);
+      } else {
+        console.log("ack-ing unhandled action");
+        await args.ack();
+      }
     };
   }
 }

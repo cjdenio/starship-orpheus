@@ -6,20 +6,14 @@ import { Team } from "./types/team";
 import { app } from "./state";
 import { setChallenge } from "./util";
 
-app.command(
-  "/start",
-  async ({ ack, command: { channel_id: channel, text } }) => {
-    const team = await Team.findOne({ channel });
+app.command("/start", async ({ ack, command: { text } }) => {
+  const teams = await Team.find();
 
-    if (!team) {
-      ack("Please run this in your team's channel.");
-      return;
-    }
-
-    await ack("starting");
-    await setChallenge(team, parseInt(text) || 0, true);
-  }
-);
+  await ack();
+  teams.forEach((team) => {
+    setChallenge(team, parseInt(text) || 0, true);
+  });
+});
 
 (async () => {
   await createConnection({

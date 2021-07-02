@@ -1,4 +1,10 @@
-import { AllMiddlewareArgs, SlackEventMiddlewareArgs } from "@slack/bolt";
+import {
+  AllMiddlewareArgs,
+  BlockAction,
+  ButtonAction,
+  SlackActionMiddlewareArgs,
+  SlackEventMiddlewareArgs,
+} from "@slack/bolt";
 import { Challenge, ChallengeContext } from "./lib/challenge";
 
 const NUM_REACTIONS = process.env.NODE_ENV === "production" ? 3 : 1;
@@ -39,21 +45,35 @@ function onReaction(ctx: ChallengeContext) {
             ?.users.filter((u) => u !== event.item_user).length || 0) >=
           NUM_REACTIONS
         ) {
-          ctx.team.name = text;
-          await ctx.team.save();
-          await ctx.slack.client.conversations.rename({
+          await ctx.slack.client.chat.postMessage({
+            token: ctx.token,
+            blocks: [
+              {
+                type: "section",
+                text: {
+                  type: "mrkdwn",
+                  text: `Would you like to make *${text}* your team name?`,
+                },
+              },
+              {
+                type: "actions",
+                elements: [
+                  {
+                    type: "button",
+                    text: {
+                      type: "plain_text",
+                      text: "Yes!",
+                    },
+                    style: "primary",
+                    action_id: `confirm-team-name-${ctx.team.id}`,
+                    value: text,
+                  },
+                ],
+              },
+            ],
+            text: `Would you like to make *${text}* your team name?`,
             channel: ctx.team.channel,
-            name: `spaceteam-${text
-              .trim()
-              .toLowerCase()
-              .replace(/\s/g, "-")
-              .replace(/[^a-z0-9-]/g, "")}`,
-            token: ctx.userToken,
           });
-
-          await ctx.post(`I've set your team name to *${text}*!`);
-
-          await ctx.solve();
         }
       }
     }
@@ -65,13 +85,66 @@ export default {
 
   async init(ctx: ChallengeContext) {
     const reactionListener = onReaction(ctx);
+    const actionListener = async ({
+      ack,
+      payload: { value: text, ...payload },
+      body,
+    }: SlackActionMiddlewareArgs<BlockAction<ButtonAction>>) => {
+      await ack();
+
+      await ctx.slack.client.chat.update({
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        ts: body.message!.ts,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        channel: body.channel!.id,
+        token: ctx.token,
+        blocks: [
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: `Would you like to make *${text}* your team name?`,
+            },
+          },
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: `<@${body.user.id}> clicked *Yes!*`,
+            },
+          },
+        ],
+        text: `Would you like to make *${text}* your team name?`,
+      });
+
+      ctx.team.name = text;
+      await ctx.team.save();
+      await ctx.slack.client.conversations.rename({
+        channel: ctx.team.channel,
+        name: `spaceteam-${text
+          .trim()
+          .toLowerCase()
+          .replace(/\s/g, "-")
+          .replace(/[^a-z0-9-]/g, "")}`,
+        token: ctx.userToken,
+      });
+
+      await ctx.post(`I've set your team name to *${text}*!`, false);
+
+      await ctx.solve();
+    };
 
     ctx.listener.event("reaction_added", reactionListener);
+    ctx.listener.action(`confirm-team-name-${ctx.team.id}`, actionListener);
 
     return () => {
       console.log("deinit");
 
       ctx.listener.removeListener("event:reaction_added", reactionListener);
+      ctx.listener.removeListener(
+        `action:confirm-team-name-${ctx.team.id}`,
+        actionListener
+      );
     };
   },
   async start(ctx: ChallengeContext) {

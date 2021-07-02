@@ -20,6 +20,7 @@
     "@slack/bolt": "^2.4.1",
     "express": "^4.17.1",
     "pg": "^8.5.1",
+    "puppeteer": "^10.1.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.30"
   },

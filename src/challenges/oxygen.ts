@@ -2,40 +2,31 @@ import { Challenge, ChallengeContext } from "./lib/challenge";
 
 import { Request, Response } from "express";
 
-function onRequest(ctx: ChallengeContext) {
-  return async (req: Request, res: Response) => {
-    if (req.method === "POST") {
-      res.json({
-        ok: true,
-        oxygen_status: "OK",
-        admin_code: "46553",
-        oxygen_reserve: "backup",
-      });
-
-      await ctx.post(
-        ":white_check_mark: `Oxygen reserve migration system armed.`"
-      );
-      await ctx.solve();
-      return;
-    }
-
-    res.status(405).send("Method Not Allowed");
-  };
-}
-
 export default {
   name: "Restoring Oxygen, Part 1",
 
   async init(ctx: ChallengeContext) {
-    const requestListener = onRequest(ctx);
+    const onRequest = async (req: Request, res: Response) => {
+      if (req.method === "POST") {
+        res.json({
+          ok: true,
+          oxygen_status: "OK",
+          admin_code: "46553",
+          oxygen_reserve: "backup",
+        });
 
-    ctx.httpListener.addListener(`/oxygen/6${ctx.team.id}763`, requestListener);
+        await ctx.post(
+          ":white_check_mark: `Oxygen reserve migration system armed.`"
+        );
+        await ctx.solve();
+        return;
+      }
+    };
+
+    ctx.httpListener.addListener(`/oxygen/6${ctx.team.id}763`, onRequest);
 
     return () => {
-      ctx.httpListener.removeListener(
-        `/oxygen/6${ctx.team.id}763`,
-        requestListener
-      );
+      ctx.httpListener.removeListener(`/oxygen/6${ctx.team.id}763`, onRequest);
     };
   },
   async start(ctx: ChallengeContext) {
