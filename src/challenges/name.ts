@@ -5,6 +5,7 @@ import {
   SlackActionMiddlewareArgs,
   SlackEventMiddlewareArgs,
 } from "@slack/bolt";
+import { Team } from "../types/team";
 import { Challenge, ChallengeContext } from "./lib/challenge";
 
 const NUM_REACTIONS = process.env.NODE_ENV === "production" ? 3 : 1;
@@ -130,6 +131,19 @@ export default {
       });
 
       await ctx.post(`I've set your team name to *${text}*!`, false);
+
+      const teams = await Team.find();
+
+      // Notify other teams
+      teams.forEach(async (team) => {
+        if (team.id !== ctx.team.id) {
+          await ctx.slack.client.chat.postMessage({
+            text: `:point_right: Heads up, team ${ctx.team.id} has decided on a name: *${text}*`,
+            token: ctx.token,
+            channel: team.channel,
+          });
+        }
+      });
 
       await ctx.solve();
     };

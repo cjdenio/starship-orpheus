@@ -35,5 +35,5 @@ export interface Challenge {
   init(ctx: ChallengeContext): Promise<() => unknown>;
 
   // Called when a team starts this challenge
-  start(ctx: ChallengeContext): Promise<void>;
+  start(ctx: ChallengeContext): unknown;
 }
