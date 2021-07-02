@@ -87,7 +87,7 @@ export default {
     const reactionListener = onReaction(ctx);
     const actionListener = async ({
       ack,
-      payload: { value: text, ...payload },
+      payload: { value: text },
       body,
     }: SlackActionMiddlewareArgs<BlockAction<ButtonAction>>) => {
       await ack();

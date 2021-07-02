@@ -1,5 +1,4 @@
 import {
-  Action,
   App,
   ExpressReceiver,
   Middleware,
@@ -9,7 +8,6 @@ import {
   SlackEventMiddlewareArgs,
 } from "@slack/bolt";
 import { EventEmitter } from "events";
-import e from "express";
 
 import config from "./config";
 
