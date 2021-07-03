@@ -3,7 +3,7 @@ import { createConnection } from "typeorm";
 
 import { Team } from "./types/team";
 
-import { app } from "./state";
+import { app, currentChallenges } from "./state";
 import { setChallenge } from "./util";
 import config from "./config";
 
@@ -15,7 +15,14 @@ app.command("/start", async ({ ack, command: { text, user_id: user } }) => {
   const teams = await Team.find();
 
   await ack();
-  teams.forEach((team) => {
+  teams.forEach(async (team) => {
+    if (text === "null") {
+      await setChallenge(team, null, true);
+      console.log(currentChallenges);
+
+      return;
+    }
+
     setChallenge(team, parseInt(text) || 0, true);
   });
 });
