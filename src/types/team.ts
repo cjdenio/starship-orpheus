@@ -12,8 +12,9 @@ export class Team extends BaseEntity {
 
   @Column({
     nullable: true,
+    type: "int",
   })
-  currentChallenge: number;
+  currentChallenge: number | null;
 
   @Column({
     nullable: true,

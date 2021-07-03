@@ -30,7 +30,7 @@ function onMessage(ctx: ChallengeContext) {
       event.channel === ctx.team.channel &&
       (event as GenericMessageEvent).text === "back"
     ) {
-      await setChallenge(ctx.team, ctx.team.currentChallenge - 1, true);
+      await setChallenge(ctx.team, ctx.team.currentChallenge! - 1, true);
     }
   };
 }

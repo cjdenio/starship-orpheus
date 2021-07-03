@@ -13,7 +13,7 @@ const onSolve = (team: number, index: number) => {
 
 export const setChallenge = async (
   team: Team,
-  index: number,
+  index: number | null,
   shouldCallStart: boolean
 ): Promise<void> => {
   // First, de-init the existing challenge (if necessary)
@@ -25,6 +25,12 @@ export const setChallenge = async (
     }
 
     currentChallenges[team.id] = null;
+  }
+
+  if (index === null) {
+    team.currentChallenge = null;
+    await team.save();
+    return;
   }
 
   // Is such a challenge nonexistent?
