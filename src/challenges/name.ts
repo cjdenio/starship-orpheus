@@ -94,9 +94,7 @@ export default {
       await ack();
 
       await ctx.slack.client.chat.update({
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         ts: body.message!.ts,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         channel: body.channel!.id,
         token: ctx.token,
         blocks: [

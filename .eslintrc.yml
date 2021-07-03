@@ -12,3 +12,4 @@ plugins:
   - "@typescript-eslint"
 rules:
   eqeqeq: warn
+  "@typescript-eslint/no-non-null-assertion": off

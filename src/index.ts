@@ -31,6 +31,6 @@ app.command("/start", async ({ ack, command: { text } }) => {
     }
   });
 
-  await app.start(process.env.PORT || 3000);
+  await app.start(parseInt(process.env.PORT!) || 3000);
   console.log("App started!");
 })();

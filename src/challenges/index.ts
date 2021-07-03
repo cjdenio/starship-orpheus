@@ -2,6 +2,7 @@ import name from "./name";
 import oxygen from "./oxygen";
 import oxygen2 from "./oxygen-2";
 import intro from "./util/intro";
+import wires from "./wires";
 
 export default [
   intro(
@@ -26,4 +27,5 @@ You and your fellow crew members quickly discover that the _Orpheus_' communicat
   ),
   oxygen,
   oxygen2,
+  wires,
 ];

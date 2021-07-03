@@ -1,4 +1,8 @@
-import { AllMiddlewareArgs, SlackEventMiddlewareArgs } from "@slack/bolt";
+import {
+  AllMiddlewareArgs,
+  GenericMessageEvent,
+  SlackEventMiddlewareArgs,
+} from "@slack/bolt";
 import { setChallenge } from "../util";
 import { Challenge, ChallengeContext } from "./lib/challenge";
 
@@ -6,7 +10,10 @@ function onMessage(ctx: ChallengeContext) {
   return async ({
     event,
   }: SlackEventMiddlewareArgs<"message"> & AllMiddlewareArgs) => {
-    if (event.channel === ctx.team.channel && event.text === "46553") {
+    if (
+      event.channel === ctx.team.channel &&
+      (event as GenericMessageEvent).text === "46553"
+    ) {
       await Promise.all([
         ctx.post(
           ":white_check_mark: `Access granted. Oxygen reserve migration complete.`"
@@ -19,7 +26,10 @@ function onMessage(ctx: ChallengeContext) {
         }),
       ]);
       await ctx.solve();
-    } else if (event.channel === ctx.team.channel && event.text === "back") {
+    } else if (
+      event.channel === ctx.team.channel &&
+      (event as GenericMessageEvent).text === "back"
+    ) {
       await setChallenge(ctx.team, ctx.team.currentChallenge - 1, true);
     }
   };
