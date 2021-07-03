@@ -5,8 +5,13 @@ import { Team } from "./types/team";
 
 import { app } from "./state";
 import { setChallenge } from "./util";
+import config from "./config";
 
-app.command("/start", async ({ ack, command: { text } }) => {
+app.command("/start", async ({ ack, command: { text, user_id: user } }) => {
+  if (!config.admin.includes(user)) {
+    await ack("wat");
+  }
+
   const teams = await Team.find();
 
   await ack();

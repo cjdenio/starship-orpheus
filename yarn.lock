@@ -236,6 +236,20 @@
   resolved "https://registry.yarnpkg.com/@types/p-queue/-/p-queue-2.3.2.tgz#16bc5fece69ef85efaf2bce8b13f3ebe39c5a1c8"
   integrity sha512-eKAv5Ql6k78dh3ULCsSBxX6bFNuGjTmof5Q/T6PiECDq0Yf8IIn46jCyp3RJvCi8owaEmm3DZH1PEImjBMd/vQ==
 
+"@types/pixelmatch@^5.2.3":
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/@types/pixelmatch/-/pixelmatch-5.2.3.tgz#aefcbfa7fb2861727af0ab7c097be7383bd584dd"
+  integrity sha512-p+nAQVYK/DUx7+s1Xyu9dqAg0gobf7VmJ+iDA4lljg1o4XRgQHr7R2h1NwFt3gdNOZiftxWB11+0TuZqXYf19w==
+  dependencies:
+    "@types/node" "*"
+
+"@types/pngjs@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@types/pngjs/-/pngjs-6.0.0.tgz#d5372348793a383eb2220e43b661af61daf364b8"
+  integrity sha512-PyZJHtd/mGA9a+cb3RQvd2pj56OIoo522sEhGZvq9THfBv5skyPRo50o3Hvy+n6U0u8RWteMHhlvLfN4FOZTaA==
+  dependencies:
+    "@types/node" "*"
+
 "@types/promise.allsettled@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@types/promise.allsettled/-/promise.allsettled-1.0.3.tgz#6f3166618226a570b98c8250fc78687a912e56d5"
@@ -2405,6 +2419,13 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.3:
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.0.tgz#f1f061de8f6a4bf022892e2d128234fb98302972"
   integrity sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==
 
+pixelmatch@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/pixelmatch/-/pixelmatch-5.2.1.tgz#9e4e4f4aa59648208a31310306a5bed5522b0d65"
+  integrity sha512-WjcAdYSnKrrdDdqTcVEY7aB7UhhwjYQKYhHiBXdJef0MOaQeYpUdQ+iVyBLa5YBKS8MPVPPMX7rpOByISLpeEQ==
+  dependencies:
+    pngjs "^4.0.1"
+
 pkg-dir@4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-4.2.0.tgz#f099133df7ede422e81d1d8448270eeb3e4261f3"
@@ -2418,6 +2439,16 @@ please-upgrade-node@^3.2.0:
   integrity sha512-gQR3WpIgNIKwBMVLkpMUeR3e1/E1y42bqDQZfql+kDeXd8COYfM8PQA4X6y7a8u9Ua9FHmsrrmirW2vHs45hWg==
   dependencies:
     semver-compare "^1.0.0"
+
+pngjs@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-4.0.1.tgz#f803869bb2fc1bfe1bf99aa4ec21c108117cfdbe"
+  integrity sha512-rf5+2/ioHeQxR6IxuYNYGFytUyG3lma/WW1nsmjeHlWwtb2aByla6dkVc8pmJ9nplzkTA0q2xx7mMWrOTqT4Gg==
+
+pngjs@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-6.0.0.tgz#ca9e5d2aa48db0228a52c419c3308e87720da821"
+  integrity sha512-TRzzuFRRmEoSW/p1KVAmiOgPco2Irlah+bGFCeNfJXxxYGwSw7YwAOAcd7X28K/m5bjBWKsC29KyoMfHbypayg==
 
 postgres-array@~2.0.0:
   version "2.0.0"

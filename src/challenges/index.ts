@@ -1,3 +1,4 @@
+import centering from "./centering";
 import name from "./name";
 import oxygen from "./oxygen";
 import oxygen2 from "./oxygen-2";
@@ -28,4 +29,5 @@ You and your fellow crew members quickly discover that the _Orpheus_' communicat
   oxygen,
   oxygen2,
   wires,
+  centering,
 ];
