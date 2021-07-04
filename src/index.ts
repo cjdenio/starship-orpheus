@@ -6,7 +6,7 @@ import { Team } from "./types/team";
 import { app, currentChallenges } from "./state";
 import { setChallenge } from "./util";
 import config from "./config";
-import { Block, SectionBlock } from "@slack/bolt";
+import { SectionBlock } from "@slack/bolt";
 import challenges from "./challenges";
 
 app.command("/start", async ({ ack, command: { text, user_id: user } }) => {
@@ -29,7 +29,7 @@ app.command("/start", async ({ ack, command: { text, user_id: user } }) => {
   });
 });
 
-app.command("/starship-status", async ({ command, ack }) => {
+app.command("/starship-status", async ({ ack }) => {
   const blocks: SectionBlock[] = [];
 
   const teams = await Team.createQueryBuilder("team").orderBy("id").getMany();
