@@ -21,7 +21,7 @@ export class HttpListener extends EventEmitter {
 
     receiver.app.use((req, res, next) => {
       if (this.listenerCount(req.path) > 0) {
-        this.emit(req.path, req, res);
+        this.emit(req.path, req, res, next);
       } else {
         next();
       }

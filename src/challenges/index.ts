@@ -1,7 +1,9 @@
+import twoFactorAuth from "./2fa";
 import centering from "./centering";
 import name from "./name";
 import oxygen from "./oxygen";
 import oxygen2 from "./oxygen-2";
+import password from "./password";
 import intro from "./util/intro";
 import wires from "./wires";
 
@@ -30,4 +32,6 @@ You and your fellow crew members quickly discover that the _Orpheus_' communicat
   oxygen2,
   wires,
   centering,
+  password,
+  twoFactorAuth,
 ];

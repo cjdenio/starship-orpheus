@@ -6,6 +6,8 @@ import { Team } from "./types/team";
 import { app, currentChallenges } from "./state";
 import { setChallenge } from "./util";
 import config from "./config";
+import { Block, SectionBlock } from "@slack/bolt";
+import challenges from "./challenges";
 
 app.command("/start", async ({ ack, command: { text, user_id: user } }) => {
   if (!config.admin.includes(user)) {
@@ -24,6 +26,42 @@ app.command("/start", async ({ ack, command: { text, user_id: user } }) => {
     }
 
     setChallenge(team, parseInt(text) || 0, true);
+  });
+});
+
+app.command("/starship-status", async ({ command, ack }) => {
+  const blocks: SectionBlock[] = [];
+
+  const teams = await Team.createQueryBuilder("team").orderBy("id").getMany();
+
+  teams.forEach((team) => {
+    if (team.currentChallenge !== null) {
+      blocks.push({
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `Team ${team.id} (${
+            team.name || "_no name yet_"
+          }) is on challenge ${team.currentChallenge}/${challenges.length}: *${
+            challenges[team.currentChallenge].name
+          }*`,
+        },
+      });
+    } else {
+      blocks.push({
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `Team ${team.id} (${
+            team.name || "_no name yet_"
+          }) isn't working on a challenge right now.`,
+        },
+      });
+    }
+  });
+
+  await ack({
+    blocks,
   });
 });
 

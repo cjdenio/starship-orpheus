@@ -10,7 +10,7 @@ import { PNG } from "pngjs";
 import { readFile } from "fs/promises";
 
 const centering: Challenge = {
-  name: "Centering a div",
+  name: "Centering A Div",
   async init(ctx: ChallengeContext) {
     const onMessage = async (
       args: SlackEventMiddlewareArgs<"message"> & AllMiddlewareArgs
@@ -86,14 +86,16 @@ const centering: Challenge = {
     };
   },
   async start(ctx: ChallengeContext) {
-    await ctx.post(`With power restored to the communication system, you quickly realize that the UI looks terrible! So terrible, in fact, that you can barely figure out how to log in.
+    await ctx.post(`With power restored to the communication system, you can't help but notice that the UI looks terrible! So terrible, in fact, that you can barely figure out how to log in.
+
+_Needs more eeby deeby_, you think.
 
 Being the developer you are, you decide to take a minute to spice up the communications UI while the rest of your team isn't looking :shushing_face:
 
 *Your objective:* in a single HTML file, create a page that simply contains the text \`EEBY DEEBY\`, with this style:
 
 - a \`sans-serif\` font
-- the highest possible font weight
+- the thickest possible font weight
 - red (\`#FF0000\`)
 - 30px font size
 

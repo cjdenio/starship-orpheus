@@ -30,7 +30,7 @@ const INPUT = JSON.stringify([
 ]);
 
 export default {
-  name: "hi",
+  name: "WIRES WIRES WIRES",
   async init(ctx: ChallengeContext) {
     const onMessage = async ({
       event,

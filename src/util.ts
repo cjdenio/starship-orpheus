@@ -4,6 +4,7 @@ import challenges from "./challenges";
 import { ChallengeContext } from "./challenges/lib/challenge";
 
 import { app, listener, httpListener } from "./state";
+import transcript from "./transcript";
 
 const onSolve = (team: number, index: number) => {
   return async () => {
@@ -36,10 +37,25 @@ export const setChallenge = async (
   // Is such a challenge nonexistent?
   if (!challenges[index]) {
     if (shouldCallStart) {
-      console.log(`Team ${team.id} won!!!`);
+      const teams = await Team.find();
+
+      await app.client.chat.postMessage({
+        channel: team.channel,
+        text: transcript.end.win(team.name),
+      });
+
+      teams.forEach(async (t) => {
+        if (t.id !== team.id) {
+          setChallenge(t, null, false);
+          app.client.chat.postMessage({
+            channel: t.channel,
+            text: transcript.end.lose(t.name),
+          });
+        }
+      });
     }
 
-    team.currentChallenge = -1;
+    team.currentChallenge = null;
     await team.save();
     return;
   }
@@ -60,7 +76,7 @@ export const setChallenge = async (
       userToken: process.env.SLACK_USER_TOKEN as string,
       solve: onSolve(team.id, index),
       post: async (text: string, divider = true) => {
-        app.client.chat.postMessage({
+        await app.client.chat.postMessage({
           text,
           blocks: [
             {

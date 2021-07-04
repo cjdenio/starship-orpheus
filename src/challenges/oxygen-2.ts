@@ -36,7 +36,7 @@ function onMessage(ctx: ChallengeContext) {
 }
 
 export default {
-  name: "Restoring Oxygen, Part 1",
+  name: "Restoring Oxygen, Part 2",
 
   async init(ctx: ChallengeContext) {
     const messageListener = onMessage(ctx);
