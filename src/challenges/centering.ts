@@ -101,7 +101,7 @@ Being the developer you are, you decide to take a minute to spice up the communi
 
 There's a catch though: the text must be *vertically and horizontally centered*. _Is this even possible?_ you think to yourself.
 
-You can submit your new UI in one of 2 different ways:
+You may submit your new UI in one of 2 different ways:
 
 - Upload an \`.html\` file to this channel
 - Place your solution in a text snippet (not a message) sent to this channel. (make sure the \`type\` is set to HTML)

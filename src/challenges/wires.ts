@@ -30,7 +30,7 @@ const INPUT = JSON.stringify([
 ]);
 
 export default {
-  name: "WIRES WIRES WIRES",
+  name: "Crossed Wires",
   async init(ctx: ChallengeContext) {
     const onMessage = async ({
       event,
