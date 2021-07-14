@@ -37,7 +37,7 @@ const twoFactorAuth: Challenge = {
 
         if (parsed.get("text") !== "starship") {
           res.send(
-            `Unknown subcommand. The only supported one is \`/${url} starship\``
+            `Unknown subcommand. The only supported command is \`/${url} starship\``
           );
           return;
         }
@@ -58,7 +58,7 @@ const twoFactorAuth: Challenge = {
         !event.thread_ts &&
         event.text === CODE
       ) {
-        await ctx.post("You've been logged in!");
+        await ctx.post(":white_check_mark: You've been logged in!");
         await ctx.solve();
       }
     };

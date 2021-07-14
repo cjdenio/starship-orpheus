@@ -72,7 +72,7 @@ export default {
 
 Red, purple, yellow, and green, these wires all seem to have _some_ purpose, but you can't quite figure it out.
 
-:point_right: *Your objective:* write a script (in any language) to do the following:`,
+:point_right: *Your objective:* write a script (in any language ~though Emojicode preferred~) to do the following:`,
           },
         },
         {
@@ -89,5 +89,7 @@ Red, purple, yellow, and green, these wires all seem to have _some_ purpose, but
       channel: ctx.team.channel,
       text: "With your ship's oxygen at a safe level, your team takes a look the communications system...",
     });
+
+    await ctx.solve();
   },
 } as Challenge;

@@ -8,7 +8,9 @@ import {
 import { Team } from "../types/team";
 import { Challenge, ChallengeContext } from "./lib/challenge";
 
-const NUM_REACTIONS = process.env.NODE_ENV === "production" ? 3 : 1;
+const isProduction = process.env.NODE_ENV === "production";
+
+const NUM_REACTIONS = isProduction ? 3 : 1;
 const EMOJI = "white_check_mark";
 
 function onReaction(ctx: ChallengeContext) {
@@ -18,8 +20,7 @@ function onReaction(ctx: ChallengeContext) {
     if (
       event.reaction === EMOJI &&
       event.item.type === "message" &&
-      event.item.channel === ctx.team.channel &&
-      event.item_user !== event.user
+      event.item.channel === ctx.team.channel
     ) {
       const resp = await ctx.slack.client.conversations.history({
         latest: event.item.ts,
@@ -29,22 +30,19 @@ function onReaction(ctx: ChallengeContext) {
         token: ctx.token,
       });
 
-      const message = (
-        resp as unknown as {
-          messages: {
-            text: string;
-            reactions: { name: string; users: string[] }[];
-          }[];
-        }
-      ).messages[0];
+      if (!resp.messages) return;
+
+      const message = resp.messages[0];
 
       if (message) {
         const { text, reactions } = message;
+
         if (
+          reactions &&
           (reactions
-            .find((i) => i.name === EMOJI)
-            ?.users.filter((u) => u !== event.item_user).length || 0) >=
-          NUM_REACTIONS
+            .find((i) => i.name === EMOJI)!
+            .users!.filter((u) => !isProduction || u !== event.item_user)
+            .length || 0) >= NUM_REACTIONS
         ) {
           await ctx.slack.client.chat.postMessage({
             token: ctx.token,
@@ -150,8 +148,6 @@ export default {
     ctx.listener.action(`confirm-team-name-${ctx.team.id}`, actionListener);
 
     return () => {
-      console.log("deinit");
-
       ctx.listener.removeListener("event:reaction_added", reactionListener);
       ctx.listener.removeListener(
         `action:confirm-team-name-${ctx.team.id}`,

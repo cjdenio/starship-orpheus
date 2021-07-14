@@ -41,10 +41,10 @@ app.command("/starship-status", async ({ ack }) => {
         text: {
           type: "mrkdwn",
           text: `Team ${team.id} (${
-            team.name || "_no name yet_"
-          }) is on challenge ${team.currentChallenge}/${challenges.length}: *${
-            challenges[team.currentChallenge].name
-          }*`,
+            team.name ? "*" + team.name + "*" : "_no name yet_"
+          }) is on challenge ${team.currentChallenge + 1}/${
+            challenges.length
+          }: *${challenges[team.currentChallenge].name}*`,
         },
       });
     } else {
@@ -53,7 +53,7 @@ app.command("/starship-status", async ({ ack }) => {
         text: {
           type: "mrkdwn",
           text: `Team ${team.id} (${
-            team.name || "_no name yet_"
+            team.name ? "*" + team.name + "*" : "_no name yet_"
           }) isn't working on a challenge right now.`,
         },
       });

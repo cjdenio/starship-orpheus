@@ -1,5 +1,6 @@
 import twoFactorAuth from "./2fa";
 import centering from "./centering";
+import { Challenge } from "./lib/challenge";
 import name from "./name";
 import oxygen from "./oxygen";
 import oxygen2 from "./oxygen-2";
@@ -7,7 +8,7 @@ import password from "./password";
 import intro from "./util/intro";
 import wires from "./wires";
 
-export default [
+const challenges: Challenge[] = [
   intro(
     1,
     `_You wake up._
@@ -34,4 +35,22 @@ You and your fellow crew members quickly discover that the _Orpheus_' communicat
   centering,
   password,
   twoFactorAuth,
+  intro(
+    "Making Contact",
+    `_You hear static._
+
+> _Hello?_ you say.
+
+> _Hello? Who's there?_ an anxious voice replies.
+
+A hush falls over your group.
+
+> This is the crew of the Starship _Orpheus_.`
+  ),
+  intro(
+    "Making Contact: Part 2",
+    `A relieved commotion can be heard over the radio.`
+  ),
 ];
+
+export default challenges;

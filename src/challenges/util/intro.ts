@@ -11,11 +11,11 @@ function onCommand(ctx: ChallengeContext) {
 }
 
 export default function (
-  part: number,
+  name: number | string,
   text: string | ((ctx: ChallengeContext) => string)
 ): Challenge {
   return {
-    name: `Introduction Part ${part}`,
+    name: typeof name === "number" ? `Introduction Part ${name}` : name,
 
     async start(ctx) {
       if (typeof text === "string") {
