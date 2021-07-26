@@ -23,14 +23,6 @@ export interface ChallengeContext {
 export interface Challenge {
   name: string;
 
-  hint?: {
-    // The hint text
-    hint: string;
-
-    // The number of seconds to wait before revealing the hint
-    delay: number;
-  };
-
   // Used to register event listeners and such
   init(ctx: ChallengeContext): Promise<() => unknown>;
 

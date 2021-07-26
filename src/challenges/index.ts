@@ -40,13 +40,13 @@ You and your fellow crew members quickly discover that the _Orpheus_' communicat
     "Making Contact",
     `_You hear static._
 
-> _Hello?_ you say.
+> "Hello?" you say.
 
-> _Hello? Who's there?_ an anxious voice replies.
+> "Hello? Who's there?" an anxious voice replies.
 
 A hush falls over your group.
 
-> This is the crew of the Starship _Orpheus_.`
+> "This is the crew of the Starship _Orpheus_."`
   ),
   intro(
     "Making Contact: Part 2",
@@ -54,15 +54,15 @@ A hush falls over your group.
 
 The apparent leader grabs the microphone again, and, though out of breath, she begins to speak.
 
-> Your starship has an inbuilt space rover, tucked away in a secret room, designed for situations just like this one.
+> "Your starship has an inbuilt space rover, tucked away in a secret room, designed for situations just like this one."
 
 She describes the exact location of the rover, and you quickly jot down notes on that sticky note you found earlier.
 
-> To open the room, two of your crew members must insert their keys into seperate control pods found on opposite ends of the starship, and turn them simultaneously.
+> "To open the room, two of your crew members must insert their keys into seperate control pods found on opposite ends of the starship, and turn them simultaneously."
 
-More commotion. You think you hear _Pizza's here!_, but you can't quite be sure.
+More commotion. You think you hear "_Pizza's here!_", but you can't quite be sure.
 
-> Woohoo!!!... erm... if you'll excuse me, our lunch has just arrived. Best of luck to you all.
+> "Woohoo!!!... erm... if you'll excuse me, our lunch has just arrived. Best of luck to you all."
 
 Appreciating the rarity of space pizza, you quickly thank her and log off.`
   ),

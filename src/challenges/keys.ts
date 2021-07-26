@@ -33,7 +33,7 @@ Nice try, <@${users[0]}>, but someone else needs to turn their key with you.`);
           } else {
             await ctx.post(`:rotating_light: _buzzer noises_
 
-AAAAAAAAAAAA ${users.length} PEOPLE IS TOO MUSH`);
+AAAAAAAAAAAA ${users.length} PEOPLE IS TOO MUCH`);
           }
 
           runs = {};
@@ -45,6 +45,7 @@ AAAAAAAAAAAA ${users.length} PEOPLE IS TOO MUSH`);
     };
 
     ctx.listener.command("/opendoor", ctx.team.channel, commandListener);
+
     return () => {
       ctx.listener.removeCommand(
         "/opendoor",
@@ -55,7 +56,7 @@ AAAAAAAAAAAA ${users.length} PEOPLE IS TOO MUSH`);
   },
   async start(ctx) {
     ctx.post(
-      "*Your objective:* To open the door, two, and *exactly two*, of your team members must simultaneously run the `/opendoor` slash command.",
+      "*Your objective:* To open the door, two, and *exactly two*, of your team members must simultaneously run the `/opendoor` slash command inside this channel.",
       false
     );
   },
