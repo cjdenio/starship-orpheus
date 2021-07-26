@@ -35,6 +35,6 @@
     "dev": "nodemon src/index.ts",
     "format:check": "prettier --check .",
     "format:write": "prettier -w .",
-    "lint:check": "eslint --max-warnings 1 ."
+    "lint": "eslint --max-warnings 1 ."
   }
 }

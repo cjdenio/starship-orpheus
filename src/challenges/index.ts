@@ -1,5 +1,6 @@
 import twoFactorAuth from "./2fa";
 import centering from "./centering";
+import keys from "./keys";
 import { Challenge } from "./lib/challenge";
 import name from "./name";
 import oxygen from "./oxygen";
@@ -21,7 +22,7 @@ You and your fellow crew members quickly discover that the _Orpheus_' communicat
   ),
   intro(
     2,
-    `It's up to you and your fellow astronauts to restore contact with Mission Control and make it safely to base. You'll need to work together, pooling together your collective skills. The future of the Mars program rests on your shoulders.`
+    `It's up to you and your fellow astronauts to restore contact with Mission Control and make it safely to base. You'll need to work together, as each challenge you'll encounter requires unique knowledge and skills. The future of the Mars program rests on your shoulders.`
   ),
   name,
   intro(
@@ -49,8 +50,23 @@ A hush falls over your group.
   ),
   intro(
     "Making Contact: Part 2",
-    `A relieved commotion can be heard over the radio.`
+    `A relieved commotion can be heard over the radio. Joyful shouts of "They're alive!" and "Gadzooks!" ring through your ears, and you can't help but feel a bit of relief yourself.
+
+The apparent leader grabs the microphone again, and, though out of breath, she begins to speak.
+
+> Your starship has an inbuilt space rover, tucked away in a secret room, designed for situations just like this one.
+
+She describes the exact location of the rover, and you quickly jot down notes on that sticky note you found earlier.
+
+> To open the room, two of your crew members must insert their keys into seperate control pods found on opposite ends of the starship, and turn them simultaneously.
+
+More commotion. You think you hear _Pizza's here!_, but you can't quite be sure.
+
+> Woohoo!!!... erm... if you'll excuse me, our lunch has just arrived. Best of luck to you all.
+
+Appreciating the rarity of space pizza, you quickly thank her and log off.`
   ),
+  keys,
 ];
 
 export default challenges;

@@ -12,6 +12,7 @@ import challenges from "./challenges";
 app.command("/start", async ({ ack, command: { text, user_id: user } }) => {
   if (!config.admin.includes(user)) {
     await ack("wat");
+    return;
   }
 
   const teams = await Team.find();

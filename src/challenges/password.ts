@@ -33,7 +33,7 @@ const password: Challenge = {
   async start(ctx: ChallengeContext) {
     await ctx.post(`An EEBY DEEBY-ified login screen appears, but nobody on your team can remember the password.
 
-Fortunately, there's a hint taped to the monitor:
+Fortunately, there's a hint on a sticky note taped to the monitor:
 \`\`\`
 ${Buffer.from(Buffer.from(PASSWORD).toString("base64")).toString("hex")}
 \`\`\`
