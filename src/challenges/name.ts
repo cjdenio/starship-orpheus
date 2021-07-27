@@ -126,7 +126,7 @@ export default {
         token: ctx.userToken,
       });
 
-      await ctx.post(`I've set your team name to *${text}*!`, false);
+      await ctx.post(`I've set your team name to *${text}*!`);
 
       const teams = await Team.find();
 

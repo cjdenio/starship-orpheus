@@ -1,0 +1,24 @@
+{
+  "Challenge": {
+    "prefix": "challenge",
+    "body": [
+      "import { Challenge } from \"./lib/challenge\";",
+      "",
+      "const $TM_FILENAME_BASE: Challenge = {",
+      "  name: \"${1:$TM_FILENAME_BASE}\",",
+      "  async init(ctx) {",
+      "    $2",
+      "",
+      "    return () => {",
+      "      $3",
+      "    }",
+      "  },",
+      "  async start(ctx) {",
+      "    await ctx.post(\"${4:howdy}\");",
+      "  },",
+      "}",
+      "",
+      "export default $TM_FILENAME_BASE"
+    ]
+  }
+}

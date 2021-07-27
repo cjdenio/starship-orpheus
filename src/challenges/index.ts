@@ -1,7 +1,9 @@
+import { Challenge } from "./lib/challenge";
+
 import twoFactorAuth from "./2fa";
+import airlock from "./airlock";
 import centering from "./centering";
 import keys from "./keys";
-import { Challenge } from "./lib/challenge";
 import name from "./name";
 import oxygen from "./oxygen";
 import oxygen2 from "./oxygen-2";
@@ -67,6 +69,7 @@ More commotion. You think you hear "_Pizza's here!_", but you can't quite be sur
 Appreciating the rarity of space pizza, you quickly thank her and log off.`
   ),
   keys,
+  airlock,
 ];
 
 export default challenges;
