@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker run  --name "airlock-1" --restart=unless-stopped -d -p 2221:22 --hostname=airlock -e PASSWORD=oAHu9FkzrX airlock
+docker run  --name "airlock-2" --restart=unless-stopped -d -p 2222:22 --hostname=airlock -e PASSWORD=4T0HbZe7DF airlock

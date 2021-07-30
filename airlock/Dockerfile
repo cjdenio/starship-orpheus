@@ -11,7 +11,7 @@ RUN apt update -y && \
 
 RUN mkdir -p /run/sshd
 
-RUN useradd -ms /bin/bash -p "$(openssl passwd -1 password)" crew
-COPY ./README /home/crew/README
+COPY ./README /etc/skel
 
-CMD ["/usr/sbin/sshd", "-D"]
+COPY ./entrypoint.sh /
+CMD ["/entrypoint.sh"]

@@ -5,30 +5,6 @@ import {
 } from "@slack/bolt";
 import { Challenge, ChallengeContext } from "./lib/challenge";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const INPUT = JSON.stringify([
-  {
-    color: "y",
-    start: 1,
-    end: 5,
-  },
-  {
-    color: "y",
-    start: 1,
-    end: 5,
-  },
-  {
-    color: "y",
-    start: 1,
-    end: 5,
-  },
-  {
-    color: "y",
-    start: 1,
-    end: 5,
-  },
-]);
-
 export default {
   name: "Crossed Wires",
   async init(ctx: ChallengeContext) {
