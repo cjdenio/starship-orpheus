@@ -17,11 +17,11 @@ print_status () {
 start () {
     echo "Starting..."
     sleep 1
+    curl -s $SPACEDINO_URL > /dev/null
+
     echo 'Status: running' > ~/.airlockctl
 
     echo "Success!"
-
-    echo $SPACEDINO_URL
 }
 
 stop () {

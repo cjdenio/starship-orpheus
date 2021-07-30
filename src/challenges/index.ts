@@ -12,7 +12,7 @@ import intro from "./util/intro";
 import wires from "./wires";
 
 const challenges: Challenge[] = [
-  intro(
+  /* 0 */ intro(
     1,
     `_You wake up._
       
@@ -22,23 +22,23 @@ Unfortunately, your ship was forced to make an emergency landing due to engine f
 
 You and your fellow crew members quickly discover that the _Orpheus_' communications and navigational systems are down, and there's no telling how long your oxygen will last.`
   ),
-  intro(
+  /* 1 */ intro(
     2,
     `It's up to you and your fellow astronauts to restore contact with Mission Control and make it safely to base. You'll need to work together, as each challenge you'll encounter requires unique knowledge and skills. The future of the Mars program rests on your shoulders.`
   ),
-  name,
-  intro(
+  /* 2 */ name,
+  /* 3 */ intro(
     3,
     (ctx) =>
       `With your team name decided, you're ready to begin. Good luck, team *${ctx.team.name}*.`
   ),
-  oxygen,
-  oxygen2,
-  wires,
-  centering,
-  password,
-  twoFactorAuth,
-  intro(
+  /* 4 */ oxygen,
+  /* 5 */ oxygen2,
+  /* 6 */ wires,
+  /* 7 */ centering,
+  /* 8 */ password,
+  /* 9 */ twoFactorAuth,
+  /* 10 */ intro(
     "Making Contact",
     `_You hear static._
 
@@ -50,7 +50,7 @@ A hush falls over your group.
 
 > "This is the crew of the Starship _Orpheus_."`
   ),
-  intro(
+  /* 11 */ intro(
     "Making Contact: Part 2",
     `A relieved commotion can be heard over the radio. Joyful shouts of "They're alive!" and "Gadzooks!" ring through your ears, and you can't help but feel a bit of relief yourself.
 
@@ -68,8 +68,8 @@ More commotion. You think you hear "_Pizza's here!_", but you can't quite be sur
 
 Appreciating the rarity of space pizza, you quickly thank her and log off.`
   ),
-  keys,
-  airlock,
+  /* 12 */ keys,
+  /* 13 */ airlock,
 ];
 
 export default challenges;

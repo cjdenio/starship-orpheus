@@ -7,7 +7,7 @@ COPY ./airlockctl /bin/airlockctl
 RUN chmod -x /etc/update-motd.d/* && rm /etc/legal
 
 RUN apt update -y && \
-    apt install -y openssh-server curl
+    apt install -y openssh-server curl iputils-ping
 
 RUN mkdir -p /run/sshd
 
