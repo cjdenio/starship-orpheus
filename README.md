@@ -22,4 +22,4 @@ A multiplayer escape-room-like event for the [Hack Club Slack](https://hackclub.
 
 `src/airlock/run` - script for quickly starting up a VM for every team
 
-`src/airlock/passwords.json` - contains the SSH passwords for each VM (will be defunct by the time this repo is made public)
+`src/airlock/passwords.json` - contains the SSH passwords for each VM (will be unused by the time this repo is made public)
