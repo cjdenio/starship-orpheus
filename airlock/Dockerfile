@@ -11,7 +11,7 @@ RUN apt update -y && \
 
 RUN mkdir -p /run/sshd
 
-COPY ./README /etc/skel
+COPY ./README.md /etc/skel
 
 COPY ./entrypoint.sh /
 CMD ["/entrypoint.sh"]

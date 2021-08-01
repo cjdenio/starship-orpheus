@@ -1,4 +1,6 @@
 #!/bin/bash
 
-docker run --name "airlock-1" --restart=unless-stopped -d -p 2221:22 --hostname=airlock -e PASSWORD=oAHu9FkzrX -e SPACEDINO_URL=https://starship.clb.li/airlock/start/1 airlock
-docker run --name "airlock-2" --restart=unless-stopped -d -p 2222:22 --hostname=airlock -e PASSWORD=4T0HbZe7DF -e SPACEDINO_URL=https://starship.clb.li/airlock/start/2 airlock
+for team in {1..2}
+do
+    docker run --name "airlock-$team" --restart=unless-stopped -d -p "222$team:22" --hostname=airlock -e PASSWORD=$(jq -r .[\"$team\"] < passwords.json) -e SPACEDINO_URL=https://starship.clb.li/airlock/start/$team airlock
+done

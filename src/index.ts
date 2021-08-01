@@ -15,9 +15,10 @@ app.command("/start", async ({ ack, command: { text, user_id: user } }) => {
     return;
   }
 
+  await ack();
+
   const teams = await Team.find();
 
-  await ack();
   teams.forEach(async (team) => {
     if (text === "null") {
       await setChallenge(team, null, true);
