@@ -2,5 +2,13 @@
 
 for team in {1..2}
 do
-    docker run --name "airlock-$team" --restart=unless-stopped -d -p "222$team:22" --hostname=airlock -e PASSWORD=$(jq -r .[\"$team\"] < passwords.json) -e SPACEDINO_URL=https://starship.clb.li/airlock/start/$team airlock
+    docker run \
+    -d \
+    --name "airlock-$team" \
+    --hostname airlock \
+    --restart unless-stopped \
+    -p "222$team:22" \
+    -e PASSWORD=$(jq -r .[\"$team\"] < passwords.json) \
+    -e SPACEDINO_URL=https://starship.clb.li/airlock/start/$team \
+    airlock
 done
