@@ -118,7 +118,7 @@ export default {
       await ctx.team.save();
       await ctx.slack.client.conversations.rename({
         channel: ctx.team.channel,
-        name: `spaceteam-${text
+        name: `${!isProduction ? "test-" : ""}spaceteam-${text
           .trim()
           .toLowerCase()
           .replace(/\s/g, "-")
