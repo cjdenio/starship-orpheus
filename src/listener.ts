@@ -19,6 +19,10 @@ export class HttpListener extends EventEmitter {
 
     this.receiver = receiver;
 
+    receiver.app.get("/", (req, res) => {
+      res.redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+    });
+
     receiver.app.use((req, res, next) => {
       if (this.listenerCount(req.path) > 0) {
         this.emit(req.path, req, res, next);

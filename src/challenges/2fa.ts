@@ -8,10 +8,23 @@ import { Challenge } from "./lib/challenge";
 
 const CODE = "4B9F7";
 
+// Every team needs a different URL in case they're all on this challenge at the same time
+const urls: { [team: number]: string } = {
+  1: "login",
+  2: "auth",
+  3: "authorize",
+  4: "2fa",
+  5: "signin",
+  6: "log-in",
+  7: "sign-in",
+  8: "verify-login",
+  9: "verify",
+};
+
 const twoFactorAuth: Challenge = {
   name: "Two-Factor Auth",
   async init(ctx) {
-    const url = ctx.team.id === 1 ? "login" : "auth";
+    const url = urls[ctx.team.id];
 
     const onRequest = (req: Request, res: Response, next: NextFunction) => {
       if (req.method !== "POST") {
@@ -72,7 +85,7 @@ const twoFactorAuth: Challenge = {
     };
   },
   async start(ctx) {
-    const url = ctx.team.id === 1 ? "login" : "auth";
+    const url = urls[ctx.team.id];
 
     await ctx.post(
       `You enter the password, but of course it can't be that simple. _Somebody_ set up two-factor authentication that can only be fulfilled by a specific person via a Slack slash command. And that person is millions of miles away.
