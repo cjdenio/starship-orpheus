@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 /**
  * 🚨 THIS CHALLENGE WAS SCRAPPED AND WAS NOT USED IN THE EVENT
  */

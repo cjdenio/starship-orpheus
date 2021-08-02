@@ -9,7 +9,6 @@ import oxygen from "./oxygen";
 import oxygen2 from "./oxygen-2";
 import password from "./password";
 import intro from "./util/intro";
-import wires from "./wires";
 import fuel from "./fuel";
 
 const challenges: Challenge[] = [
