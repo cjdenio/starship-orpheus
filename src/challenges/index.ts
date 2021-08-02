@@ -10,6 +10,7 @@ import oxygen2 from "./oxygen-2";
 import password from "./password";
 import intro from "./util/intro";
 import wires from "./wires";
+import fuel from "./fuel";
 
 const challenges: Challenge[] = [
   /* 0 */ intro(
@@ -70,6 +71,31 @@ Appreciating the rarity of space pizza, you quickly thank her and log off.`
   ),
   /* 12 */ keys,
   /* 13 */ airlock,
+  /* 14 */ intro(
+    "Fueling Up: Part 1",
+    `Much to your excitement, the airlock controls light up and begin working. Your crew jumps into the rover, turns the key, and... nothing happens.
+
+_sigh._ The fuel gauge tells you all you need to know.
+
+Frustratedly scanning the room, your eyes land on a medieval-looking fuel can in the corner. The instructions read:
+
+> :fuelpump: "Your Wofford Industries Mark II Space-Grade Land Rover is equipped with a state-of-the-art suspension and boasts a..."
+
+Hang on.
+
+> :fuelpump: "We've been trying to reach you about your space rover's extended..."
+
+Here we go: :point_down:
+
+> :fuelpump: "This is a container of certified Wofford space-grade fuel, designed to power and sustain all types and classes of Wofford vehicles. However, due to differences in how fuel burns in space, it requires a special preparatory step in order to be properly activated"
+
+> :fuelpump: "In order to activate your fuel, please mix in 5 milliliters of Wofford fuel stimulant per liter of fuel.
+>
+> :warning: *Remember*: activated fuel must be sealed inside the rover's tank within *15 seconds* of activation, otherwise there is a high chance of combustion."
+
+_That doesn't sound good._`
+  ),
+  /* 15 */ fuel,
 ];
 
 export default challenges;

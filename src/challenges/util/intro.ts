@@ -19,9 +19,9 @@ export default function (
 
     async start(ctx) {
       if (typeof text === "string") {
-        await ctx.post(text + "\n\n_Type /next to continue._");
+        await ctx.post(text + "\n\n_*Type /next to continue.*_");
       } else {
-        await ctx.post(text(ctx) + "\n\n_Type /next to continue._");
+        await ctx.post(text(ctx) + "\n\n_*Type /next to continue.*_");
       }
     },
 

@@ -15,9 +15,30 @@ app.command("/start", async ({ ack, command: { text, user_id: user } }) => {
     return;
   }
 
-  await ack();
-
   const teams = await Team.find();
+
+  if (text === "") {
+    await ack("yay");
+
+    teams.forEach(async (team) => {
+      await setChallenge(team, 0, true);
+    });
+    return;
+  } else if (text === "null") {
+    await ack("yay");
+
+    teams.forEach(async (team) => {
+      await setChallenge(team, null, true);
+    });
+    return;
+  }
+
+  const number = parseInt(text);
+
+  if (isNaN(number) || number >= challenges.length) {
+    await ack("hmm");
+    return;
+  }
 
   teams.forEach(async (team) => {
     if (text === "null") {
@@ -27,8 +48,10 @@ app.command("/start", async ({ ack, command: { text, user_id: user } }) => {
       return;
     }
 
-    setChallenge(team, parseInt(text) || 0, true);
+    await setChallenge(team, number || 0, true);
   });
+
+  await ack("yay");
 });
 
 app.command("/starship-status", async ({ ack }) => {

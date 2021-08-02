@@ -6,9 +6,10 @@ import passwords from "../../airlock/passwords.json";
 const airlock: Challenge = {
   name: "Airlock Trouble",
   async init(ctx) {
-    const requestListener = (req: Request, res: Response) => {
-      ctx.solve();
+    const requestListener = async (req: Request, res: Response) => {
       res.send("yay");
+      await ctx.solve();
+      await ctx.post(":white_check_mark: `Airlock control system online.`");
     };
 
     ctx.httpListener.addListener(
@@ -27,7 +28,7 @@ const airlock: Challenge = {
     const password = (passwords as { [team: number]: string })[ctx.team.id];
 
     await ctx.post(
-      `Opening the secret room reveals two things: a manned space rover and a wall filled with hanging spacesuits. You and your team put on the suits with minimal hassle, and survey the airlock. It seems to be ordinary, though slightly larger as to accommodate the rover.
+      `Opening the secret room reveals two things: a manned space rover and a wall filled with hanging spacesuits. You and your team put on the suits with minimal hassle, and begin to survey the airlock. It seems to be ordinary, although slightly larger than usual as to accommodate the rover.
 
 You try the controls, but nothing seems to happen. It apparently still has power, but _it must have been damaged in the crash._
 
