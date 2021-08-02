@@ -8,8 +8,8 @@ const airlock: Challenge = {
   async init(ctx) {
     const requestListener = async (req: Request, res: Response) => {
       res.send("yay");
-      await ctx.solve();
       await ctx.post(":white_check_mark: `Airlock control system online.`");
+      await ctx.solve();
     };
 
     ctx.httpListener.addListener(
