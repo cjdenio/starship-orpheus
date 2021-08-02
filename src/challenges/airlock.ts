@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { Challenge } from "./lib/challenge";
 
+import passwords from "../../airlock/passwords.json";
+
 const airlock: Challenge = {
   name: "Airlock Trouble",
   async init(ctx) {
@@ -22,7 +24,7 @@ const airlock: Challenge = {
     };
   },
   async start(ctx) {
-    const password = ctx.team.id === 1 ? "oAHu9FkzrX" : "4T0HbZe7DF";
+    const password = (passwords as { [team: number]: string })[ctx.team.id];
 
     await ctx.post(
       `Opening the secret room reveals two things: a manned space rover and a wall filled with hanging spacesuits. You and your team put on the suits with minimal hassle, and survey the airlock. It seems to be ordinary, though slightly larger as to accommodate the rover.

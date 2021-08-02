@@ -1,10 +1,10 @@
 #!/bin/bash
 
-start_container () {
+start_container() {
     docker run \
     -d \
     --name "airlock-$1" \
-    --hostname airlock \
+    --hostname "airlock-$1" \
     --restart unless-stopped \
     -p "222$1:22" \
     -e PASSWORD=$(jq -r .[\"$1\"] < passwords.json) \
