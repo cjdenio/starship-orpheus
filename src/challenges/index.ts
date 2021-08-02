@@ -35,11 +35,11 @@ You and your fellow crew members quickly discover that the _Orpheus_' communicat
   ),
   /* 4 */ oxygen,
   /* 5 */ oxygen2,
-  /* 6 */ wires,
-  /* 7 */ centering,
-  /* 8 */ password,
-  /* 9 */ twoFactorAuth,
-  /* 10 */ intro(
+  //  wires,
+  /* 6 */ centering,
+  /* 7 */ password,
+  /* 8 */ twoFactorAuth,
+  /* 9 */ intro(
     "Making Contact",
     `_You hear static._
 
@@ -51,7 +51,7 @@ A hush falls over your group.
 
 > "This is the crew of the Starship _Orpheus_."`
   ),
-  /* 11 */ intro(
+  /* 10 */ intro(
     "Making Contact: Part 2",
     `A relieved commotion can be heard over the radio. Joyful shouts of "They're alive!" and "Gadzooks!" ring through your ears, and you can't help but feel a bit of relief yourself.
 
@@ -69,9 +69,9 @@ More commotion. You think you hear "_Pizza's here!_", but you can't quite be sur
 
 Appreciating the rarity of space pizza, you quickly thank her and log off.`
   ),
-  /* 12 */ keys,
-  /* 13 */ airlock,
-  /* 14 */ intro(
+  /* 11 */ keys,
+  /* 12 */ airlock,
+  /* 13 */ intro(
     "Fueling Up: Part 1",
     `Much to your excitement, the airlock controls light up and begin working. Your crew jumps into the rover, turns the key, and... nothing happens.
 
@@ -95,7 +95,7 @@ Here we go: :point_down:
 
 _That doesn't sound good._`
   ),
-  /* 15 */ fuel,
+  /* 14 */ fuel,
 ];
 
 export default challenges;

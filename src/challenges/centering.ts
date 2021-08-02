@@ -86,7 +86,9 @@ const centering: Challenge = {
     };
   },
   async start(ctx: ChallengeContext) {
-    await ctx.post(`With power restored to the communication system, you can't help but notice that the UI looks terrible! So terrible, in fact, that you can barely figure out how to log in.
+    await ctx.post(`With your ship's oxygen at a safe level, your crew takes a look the communications system.
+
+You can't help but notice that the UI looks terrible! So terrible, in fact, that you can barely figure out how to log in.
 
 _Needs more eeby deeby_, you think.
 

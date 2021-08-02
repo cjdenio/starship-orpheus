@@ -19,7 +19,11 @@ Welcome to life in space.
 *${name}* has been named the official winner of Starship _Orpheus_. Keep your eyes trained on <#C024DGZLHDG> :eyes:`;
     },
     lose(name: string): string {
-      return `Despite your best efforts, you sadly fail to `;
+      return `Despite your best efforts, another team has finished and you fail to complete your mission.
+
+The world mourns your loss, *${name}*.
+
+<#C024DGZLHDG> will have more information shortly.`;
     },
   },
 };

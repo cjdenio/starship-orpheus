@@ -1,9 +1,15 @@
+/**
+ * 🚨 THIS CHALLENGE WAS SCRAPPED AND WAS NOT USED IN THE EVENT
+ */
+
 import {
   AllMiddlewareArgs,
   GenericMessageEvent,
   SlackEventMiddlewareArgs,
 } from "@slack/bolt";
 import { Challenge, ChallengeContext } from "./lib/challenge";
+
+const INPUT = [];
 
 export default {
   name: "Crossed Wires",
@@ -48,7 +54,7 @@ export default {
 
 Red, purple, yellow, and green, these wires all seem to have _some_ purpose, but you can't quite figure it out.
 
-:point_right: *Your objective:* write a script (in any language ~though Emojicode preferred~) to do the following:`,
+:point_right: *Your objective:* write a script (in any language) to do the following:`,
           },
         },
         {
@@ -58,14 +64,21 @@ Red, purple, yellow, and green, these wires all seem to have _some_ purpose, but
           type: "section",
           text: {
             type: "mrkdwn",
-            text: `Your challenge input (found in the thread under this message) contains a JSON string `,
+            text: `Your challenge input (found in the thread under this message) contains a JSON string with an array of objects (representing wires) that look like this:
+
+\`\`\`
+{
+  "color": "red",
+  "start": 5 // Guaranteed to be unique
+}
+\`\`\`
+
+Every wire _should_ have a \`start\` and an \`end\` (representing the port that each end of the wire is connected to), but the ends are all disconnected!`,
           },
         },
       ],
       channel: ctx.team.channel,
       text: "With your ship's oxygen at a safe level, your team takes a look the communications system...",
     });
-
-    await ctx.solve();
   },
 } as Challenge;

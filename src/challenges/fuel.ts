@@ -92,7 +92,9 @@ const next: Challenge = {
 
 - Calculate how much fuel stimulant (in mililiters) is required for *10 liters of fuel* _(put your answer in the chat :arrow_down:)_
 
-- Lifting the somewhat large fuel canister requires the strength of two people, so your crew will have *15 seconds* for at least two members to count from 1 to 20 together. Same rules as <#CDJMS683D>: numbers must be in order, and *no counting consecutively.*`);
+- Lifting the somewhat large fuel canister requires the strength of two people, so your crew will have *15 seconds* for at least two members to count from 1 to 20 together.
+
+Same rules as <#CDJMS683D>: numbers must be in order, and *no counting consecutively.*`);
   },
 };
 
