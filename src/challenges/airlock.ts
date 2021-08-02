@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { Challenge } from "./lib/challenge";
 
 const airlock: Challenge = {
-  name: "",
+  name: "Airlock Trouble",
   async init(ctx) {
     const requestListener = (req: Request, res: Response) => {
       ctx.solve();
